@@ -1,7 +1,6 @@
 #!/bin/bash
 docker build -t mysql_for_tests_step_1 .
 MYSQL_CONTAINER_ID=`docker run -d mysql_for_tests_step_1`
-docker cp init_data.sql $MYSQL_CONTAINER_ID:/
 
 echo "Waiting until $MYSQL_CONTAINER_ID finishes initialization"
 tries="0"
@@ -12,6 +11,8 @@ do
         tries=$[$tries+1]
         sleep 0.25
     else
+        # perform any operations needed to populate DB here
+        docker cp init_data.sql $MYSQL_CONTAINER_ID:/
         docker exec -it $MYSQL_CONTAINER_ID /bin/bash -c "mysql -u root -proot < /init_data.sql"
         if [ $? -ne 0 ]; then
             echo "failed to initialize DB"

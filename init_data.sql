@@ -1,3 +1,5 @@
+-- Place for any init data you wish to have when container starts
+
 CREATE DATABASE test_optimized_db;
 USE test_optimized_db;
 

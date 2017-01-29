@@ -1,3 +1,5 @@
+# Taken from https://github.com/docker-library/mysql/blob/eeb0c33dfcad3db46a0dfb24c352d2a1601c7667/8.0/Dockerfile
+# and slightly modified
 FROM debian:jessie
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
@@ -67,9 +69,10 @@ RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/mysql.conf.d/mysqld.cnf \
 
 
 ## changes
+# Volume is something we definitely want to get rid off in such container.
+# Volume's presence would not allow to persist any data in container itself
 #VOLUME /var/lib/mysql
 ENV MYSQL_ROOT_PASSWORD root
-ADD init_data.sql /
 ##
 
 COPY docker-entrypoint.sh /usr/local/bin/

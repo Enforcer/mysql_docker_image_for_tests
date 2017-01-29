@@ -1,4 +1,6 @@
 #!/bin/bash
+# Taken from https://github.com/docker-library/mysql/blob/eeb0c33dfcad3db46a0dfb24c352d2a1601c7667/8.0/docker-entrypoint.sh
+# no modifications applied
 set -eo pipefail
 shopt -s nullglob
 
